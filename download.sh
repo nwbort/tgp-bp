@@ -57,8 +57,15 @@ curl -s -L -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (K
   exit 1
 }
 
-# Get file extension based on MIME type
-EXTENSION=$(get_file_extension "$TEMP_FILE")
+# Extract original extension from URL if present
+URL_EXTENSION=$(echo "$URL" | grep -oE '\.[a-zA-Z0-9]+$' || echo "")
+
+# If URL has an extension, use that; otherwise detect from MIME type
+if [ -n "$URL_EXTENSION" ]; then
+  EXTENSION="$URL_EXTENSION"
+else
+  EXTENSION=$(get_file_extension "$TEMP_FILE")
+fi
 
 # Always construct filename from the URL, replacing slashes with hyphens
 FILENAME=$(echo "$URL" | sed -E 's|^https?://||' | sed -E 's|^www\.||' | sed 's|/$||' | sed 's|/|-|g')
