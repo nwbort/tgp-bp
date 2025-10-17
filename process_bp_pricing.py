@@ -51,7 +51,7 @@ def parse_bp_pricing(excel_file):
             continue
         
         # Parse data rows
-        if current_state and header_row and isinstance(row[0], pd.Timestamp):
+        if current_state and header_row and isinstance(row[0], (pd.Timestamp, datetime)):
             effective_date = row[0]
             terminal = str(row[header_row['terminal_col']]).strip() if not pd.isna(row[header_row['terminal_col']]) else None
             
