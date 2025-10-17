@@ -51,7 +51,7 @@ TEMP_FILE=$(mktemp)
 
 # Download the file
 echo "Downloading $URL"
-curl -s -L "$URL" -o "$TEMP_FILE" || {
+curl -s -L -H "User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" "$URL" -o "$TEMP_FILE" || {
   echo "Error: Failed to download $URL"
   rm -f "$TEMP_FILE"
   exit 1
