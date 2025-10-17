@@ -70,6 +70,9 @@ fi
 # Always construct filename from the URL, replacing slashes with hyphens
 FILENAME=$(echo "$URL" | sed -E 's|^https?://||' | sed -E 's|^www\.||' | sed 's|/$||' | sed 's|/|-|g')
 
+# Remove extension from filename if it already has one (to avoid double extensions)
+FILENAME=$(echo "$FILENAME" | sed -E 's|\.[a-zA-Z0-9]+$||')
+
 # Add extension to the filename
 FILENAME="${FILENAME}${EXTENSION}"
 
