@@ -61,7 +61,7 @@ def parse_bp_pricing(excel_file):
                     if not pd.isna(price):
                         data_records.append({
                             'state': current_state,
-                            'effective_date': effective_date.date(),
+                            'effective_date': effective_date,
                             'terminal': terminal,
                             'fuel_type': fuel,
                             'price_cents_per_litre': float(price),
@@ -104,6 +104,7 @@ def main():
     # Append to history or create new
     if os.path.exists(history_file):
         df_history = pd.read_csv(history_file, parse_dates=['effective_date', 'scraped_timestamp'])
+        df_history['effective_date'] = pd.to_datetime(df_history['effective_date'])
         df_combined = pd.concat([df_history, df_new], ignore_index=True)
         df_combined = df_combined.drop_duplicates(subset=['state', 'effective_date', 'terminal', 'fuel_type'], keep='last')
     else:
