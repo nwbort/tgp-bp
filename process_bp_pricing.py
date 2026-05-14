@@ -7,7 +7,62 @@ import pandas as pd
 import os
 from datetime import datetime
 import hashlib
+import json
 import sys
+
+STATE_CODE = {
+    'New South Wales': 'NSW',
+    'Victoria': 'VIC',
+    'Queensland': 'QLD',
+    'South Australia': 'SA',
+    'Western Australia': 'WA',
+    'Northern Territory': 'NT',
+    'Tasmania': 'TAS',
+    'Australian Capital Territory': 'ACT',
+}
+
+FUEL_TYPE = {
+    'ULP': 'ulp91',
+    'e10': 'e10',
+    'E10': 'e10',
+    'PULP': 'p95',
+    'PULP95': 'p95',
+    'PULP98': 'p98',
+    'Diesel': 'diesel',
+    'PreDiesel': 'prediesel',
+    'Premium Diesel': 'prediesel',
+    'B5': 'b5',
+}
+
+
+def write_normalised_outputs(df_combined, csv_path='bp_pricing_normalised.csv', json_path='tgp_data.json'):
+    """Write the standardised CSV and the derived tgp_data.json."""
+    df = df_combined.copy()
+    df['date'] = pd.to_datetime(df['effective_date']).dt.strftime('%Y-%m-%d')
+    df['state'] = df['state'].map(lambda s: STATE_CODE.get(s, s))
+    df['location'] = df['terminal']
+    df['fuel_type'] = df['fuel_type'].map(lambda f: FUEL_TYPE.get(f, f.lower()))
+    df['price_cpl'] = pd.to_numeric(df['price_cents_per_litre']).round(1)
+
+    df = df[['date', 'state', 'location', 'fuel_type', 'price_cpl']]
+    df = df.drop_duplicates(subset=['date', 'state', 'location', 'fuel_type'], keep='last')
+    df = df.sort_values(['date', 'state', 'location', 'fuel_type'])
+
+    df.to_csv(csv_path, index=False, float_format='%.1f')
+    print(f"Wrote {csv_path} with {len(df)} records")
+
+    payload = {
+        'provider': 'bp',
+        'updated': datetime.utcnow().strftime('%Y-%m-%d'),
+        'fields': ['date', 'state', 'location', 'fuel_type', 'price_cpl'],
+        'records': [
+            [row.date, row.state, row.location, row.fuel_type, float(row.price_cpl)]
+            for row in df.itertuples(index=False)
+        ],
+    }
+    with open(json_path, 'w') as f:
+        json.dump(payload, f, separators=(',', ':'))
+    print(f"Wrote {json_path} with {len(payload['records'])} records")
 
 def get_file_hash(filepath):
     """Calculate MD5 hash of a file."""
@@ -88,9 +143,12 @@ def main():
     if os.path.exists(hash_file):
         with open(hash_file, 'r') as f:
             last_hash = f.read().strip()
-        
+
         if current_hash == last_hash:
-            print(f"File unchanged (hash: {current_hash}). Skipping update.")
+            print(f"File unchanged (hash: {current_hash}).")
+            if os.path.exists(history_file):
+                df_history = pd.read_csv(history_file, parse_dates=['effective_date'])
+                write_normalised_outputs(df_history)
             return
     
     # Parse the file
@@ -124,7 +182,9 @@ def main():
     
     df_latest.to_csv('bp_pricing_latest.csv', index=False)
     print(f"Updated bp_pricing_latest.csv with {len(df_latest)} records (as of {latest_date})")
-    
+
+    write_normalised_outputs(df_combined)
+
     # Save hash
     with open(hash_file, 'w') as f:
         f.write(current_hash)
