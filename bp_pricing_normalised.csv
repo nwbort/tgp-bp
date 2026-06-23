@@ -10612,3 +10612,65 @@ date,state,location,fuel_type,price_cpl
 2026-06-23,WA,Perth,ulp91,148.5
 2026-06-23,WA,Port Hedland,diesel,164.2
 2026-06-23,WA,Port Hedland,ulp91,160.6
+2026-06-24,NSW,Newcastle,diesel,156.9
+2026-06-24,NSW,Newcastle,e10,145.9
+2026-06-24,NSW,Newcastle,p95,156.3
+2026-06-24,NSW,Newcastle,ulp91,146.3
+2026-06-24,NSW,Sydney-Botany,diesel,157.1
+2026-06-24,NSW,Sydney-Botany,e10,145.8
+2026-06-24,NSW,Sydney-Botany,p95,156.6
+2026-06-24,NSW,Sydney-Botany,ulp91,146.6
+2026-06-24,NSW,Sydney-Silverwater,diesel,157.1
+2026-06-24,NSW,Sydney-Silverwater,e10,145.8
+2026-06-24,NSW,Sydney-Silverwater,p95,156.6
+2026-06-24,NSW,Sydney-Silverwater,ulp91,146.6
+2026-06-24,NT,Darwin,diesel,160.5
+2026-06-24,NT,Darwin,p95,162.5
+2026-06-24,NT,Darwin,ulp91,152.5
+2026-06-24,QLD,Brisbane,diesel,158.3
+2026-06-24,QLD,Brisbane,e10,146.8
+2026-06-24,QLD,Brisbane,p95,156.9
+2026-06-24,QLD,Brisbane,ulp91,147.3
+2026-06-24,QLD,Cairns,diesel,161.8
+2026-06-24,QLD,Cairns,p95,162.3
+2026-06-24,QLD,Cairns,ulp91,152.3
+2026-06-24,QLD,Gladstone,diesel,161.9
+2026-06-24,QLD,Gladstone,p95,162.9
+2026-06-24,QLD,Gladstone,ulp91,152.9
+2026-06-24,QLD,Mackay,diesel,161.9
+2026-06-24,QLD,Mackay,e10,151.4
+2026-06-24,QLD,Mackay,p95,162.6
+2026-06-24,QLD,Mackay,ulp91,152.6
+2026-06-24,QLD,Townsville,diesel,161.5
+2026-06-24,QLD,Townsville,p95,164.4
+2026-06-24,QLD,Townsville,ulp91,154.4
+2026-06-24,SA,Adelaide,diesel,155.0
+2026-06-24,SA,Adelaide,p95,154.3
+2026-06-24,SA,Adelaide,ulp91,145.3
+2026-06-24,SA,Port Bonython,diesel,170.7
+2026-06-24,TAS,Burnie,diesel,163.3
+2026-06-24,TAS,Burnie,p95,163.2
+2026-06-24,TAS,Burnie,ulp91,153.2
+2026-06-24,TAS,Hobart,diesel,163.0
+2026-06-24,TAS,Hobart,p95,163.6
+2026-06-24,TAS,Hobart,ulp91,153.6
+2026-06-24,VIC,Geelong,diesel,158.7
+2026-06-24,VIC,Geelong,p95,157.9
+2026-06-24,VIC,Geelong,ulp91,147.9
+2026-06-24,VIC,Melbourne,diesel,158.3
+2026-06-24,VIC,Melbourne,p95,157.9
+2026-06-24,VIC,Melbourne,ulp91,147.9
+2026-06-24,WA,Broome,diesel,171.0
+2026-06-24,WA,Broome,p95,172.4
+2026-06-24,WA,Broome,ulp91,162.4
+2026-06-24,WA,Esperance,diesel,161.5
+2026-06-24,WA,Esperance,p95,168.1
+2026-06-24,WA,Esperance,ulp91,158.1
+2026-06-24,WA,Geraldton,diesel,161.1
+2026-06-24,WA,Kalgoorlie,diesel,161.8
+2026-06-24,WA,Kalgoorlie,ulp91,152.5
+2026-06-24,WA,Perth,diesel,157.6
+2026-06-24,WA,Perth,p95,158.4
+2026-06-24,WA,Perth,ulp91,148.4
+2026-06-24,WA,Port Hedland,diesel,163.4
+2026-06-24,WA,Port Hedland,ulp91,160.4
